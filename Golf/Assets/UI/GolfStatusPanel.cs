@@ -317,7 +317,7 @@ namespace Golf.UI
         private string[] BuildTitleSection(int maxRows)
         {
             var art = BuildAsciiArt(totalChars);
-            int artWidth = art.Length > 0 ? VisibleLen(art[0]) : 0;
+            int artWidth = art.Length > 0 ? TUIText.VisibleLength(art[0]) : 0;
             int pad = Mathf.Max(0, (totalChars - artWidth) / 2);
             if (pad > 0)
             {

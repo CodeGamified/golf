@@ -157,7 +157,7 @@ namespace Golf.UI
             lines.Add($" Halt {(state.IsHalted ? TUIColors.Fg(TUIColors.Red, "YES") : "no")}");
             lines.Add("");
 
-            int regCount = state.RegisterCount;
+            int regCount = MachineState.REGISTER_COUNT;
             for (int r = 0; r < regCount; r++)
             {
                 float val = state.GetRegister(r);
