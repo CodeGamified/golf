@@ -125,13 +125,13 @@ namespace Golf.UI
             return lines;
         }
 
-        public List<string> BuildMachineLines(int pc, int scrollOffset, int maxRows)
+        public List<string> BuildMachineLines(int pc, int maxRows)
         {
             var lines = new List<string>();
             if (!HasLiveProgram) return lines;
 
             var insts = _program.Program.Instructions;
-            int start = Mathf.Max(0, scrollOffset);
+            int start = Mathf.Max(0, pc - maxRows / 2);
             for (int i = start; i < insts.Length && lines.Count < maxRows; i++)
             {
                 bool isCurrent = (i == pc);
@@ -146,7 +146,7 @@ namespace Golf.UI
             return lines;
         }
 
-        public List<string> BuildStateLines(int maxRows)
+        public List<string> BuildStateLines()
         {
             var lines = new List<string>();
             var state = _program?.State;
@@ -157,7 +157,7 @@ namespace Golf.UI
             lines.Add($" Halt {(state.IsHalted ? TUIColors.Fg(TUIColors.Red, "YES") : "no")}");
             lines.Add("");
 
-            int regCount = Mathf.Min(state.RegisterCount, maxRows - lines.Count);
+            int regCount = state.RegisterCount;
             for (int r = 0; r < regCount; r++)
             {
                 float val = state.GetRegister(r);
